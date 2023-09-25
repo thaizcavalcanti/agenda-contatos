@@ -1,44 +1,89 @@
 <div class="row">
     <div class="col-md-4 offset-md-4">
-        <div class="card mt-4">
-            <div class="card-body">
-                <div class="text-center">
-                    <img src="https://www.cotiinformatica.com.br/imagens/logo-coti-informatica.svg" class="mb-2"/>
-                    <h2>Acessar Agenda</h2>
-                    <p>Entre com suas credenciais de usuário.</p>
-                </div>
-                <form>
-                    <div class="mb-2">
-                        <label>Email de acesso:</label>
-                        <input type="text" class="form-control"
-                            placeholder="Digite seu email aqui."/>
-                    </div>
-                    <div class="mb-2">
-                        <label>Senha de acesso:</label>
-                        <input type="password" class="form-control"
-                            placeholder="Digite sua senha aqui."/>
-                        <div class="text-end">
-                            <a [routerLink]="['/account/forgot-password']">
-                                Esqueci minha senha!
-                            </a>
-                        </div>
-                    </div>
-                    <div class="mb-2 d-grid">
-                        <button type="submit" class="btn btn-primary">
-                            Entrar
-                        </button>
-                    </div>
-                    <div class="mb-2 d-grid">
-                        <a [routerLink]="['/account/register']" class="btn btn-light">
-                            Não possui conta? <strong>Cadastre-se aqui!</strong>
-                        </a>
-                    </div>
-                </form>
+      <div class="card mt-4">
+        <div class="card-body">
+          <div class="text-center">
+            <img
+              src="https://www.cotiinformatica.com.br/imagens/logo-coti-informatica.svg"
+              class="mb-2"
+            />
+            <h2>Acessar Agenda</h2>
+            <p>Entre com suas credenciais de usuário.</p>
+          </div>
+  
+  
+          <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+            <div class="mb-2">
+              <label>Email de acesso:</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="email"
+                placeholder="Digite seu email aqui."
+              />
+  
+  
+              <span
+                class="text-danger"
+                *ngIf="form.email.touched && form.email.invalid"
+              >
+                <span *ngIf="form.email.errors.required">
+                  Por favor, informe o seu email de acesso.
+                </span>
+                <span *ngIf="form.email.errors.email">
+                  Por favor, informe um endereço de email válido.
+                </span>
+              </span>
             </div>
+            <div class="mb-2">
+              <label>Senha de acesso:</label>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="senha"
+                placeholder="Digite sua senha aqui."
+              />
+  
+  
+              <span
+                class="text-danger"
+                *ngIf="form.senha.touched && form.senha.invalid"
+              >
+                <span *ngIf="form.senha.errors.required">
+                  Por favor, informe a sua senha de acesso.
+                </span>
+                <span *ngIf="form.senha.errors.pattern">
+                  Por favor, informe a senha com letras maiúsculas, letras
+                  minúsculas, números, símbolos e no mínimo 8 caracteres.
+                </span>
+              </span>
+  
+  
+              <div class="text-end">
+                <a [routerLink]="['/account/forgot-password']">
+                  Esqueci minha senha!
+                </a>
+              </div>
+            </div>
+            <div class="mb-2 d-grid">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="!formLogin.valid"
+              >
+                Entrar
+              </button>
+            </div>
+            <div class="mb-2 d-grid">
+              <a [routerLink]="['/account/register']" class="btn btn-light">
+                Não possui conta? <strong>Cadastre-se aqui!</strong>
+              </a>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
-</div>
-
-
-
-
+  </div>
+  
+  
+  
